@@ -20255,7 +20255,7 @@ colin jokisch
 caen clusters shapiro library
 packers 49ers
 whisper of the heart collapse gif
-Iavindrasana, J., Cohen, G., Depeursinge, A., Müller, H., Meyer, R., && Geissbuhler, A. (2009). Clinical data mining: a review. Yearb Med Inform, 2009, 121-133.
+Iavindrasana, J., Cohen, G., Depeursinge, A., Müller, H., Meyer, R., && Geissbuhler, A (2009). Clinical data mining: a review. Yearb Med Inform, 2009, 121-133.
 Iavindrasana Clinical data mining: a review.
 Iavindrasana Clinical data mining: a review. Yearb Med Inform, 2009, 121-133.
 Hearst, M. (2003). What is text mining?
