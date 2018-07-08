@@ -9,14 +9,14 @@ class TrieNode:
         self.children = []
 #functions
 def add(root, word):
-    inChild = False
+    inChild = False#not found to be in child node yet
     node = root#so it can change every time when new children are added and it goes down one node
     for char in word:#a node contains one letter therefore it needs to iterate through each letter
         for child in node.children:#check each child to see if it contains the value
             if child.value == char:#if they match
                 child.count+=1#increase count by one
                 node = child#advance down the node root as the character advance through the word
-                inChild = True
+                inChild = True#was in child so skips if statement
         if(not inChild):#if it is not in child outside the child in children loop because it runs 0 times with no children
             new_node = TrieNode(char)#make new node with the value
             node.children.append(new_node)#add it to children
@@ -29,4 +29,5 @@ trie = TrieNode("*")#root node
 
 #start programming
 for word in historyArray:#setting up nodes
-    add(trie, word)#add new nodes taking root and word. Because of how arrays work no need to return it as it indexes to the same array
+    add(trie, word)#add new nodes taking root and word. Because of how arrays work no need to return it as it indexes to the same array)
+notFullInput = input("what would you like to autofill. Put in a word fraction and see if it autofills.\n")
