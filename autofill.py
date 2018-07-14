@@ -56,11 +56,12 @@ def sortChildrenHTL(node):
             highest = count#if it is higher
         elif(count<lowest):
             lowest = count
-    node.children = []
+    new_children = []
     for x in range(highest, lowest-1, -1):#goes from the highest to lowest (-1 because it stops right before lowest)
         for child in node.children:#searches each child
             if child.count == x:#sees if they have the same count
-                node.children.append(child)#adds them going highest to lowest
+                new_children.append(child)#adds them going highest to lowest
+    node.children = new_children
     return node
 
 def Autofill(node):
@@ -71,20 +72,20 @@ def Autofill(node):
 
 def makeAutofillEndings(node, times):
     autofillEndings = []
-    for x in range(times):
-        autofillEndings.append(Autofill(node))
+    for x in range(0, times):
+        try:
+            autofillEndings.append(Autofill(node.children[x]))
+        except IndexError:
+            return autofillEndings
     return autofillEndings
 
 def returnCompletions(UInput, trie):
     node = advanceToEndOfWord(UInput,trie)#move down trie until end of word fragment
     possibleNumberOfAutofills=len(node.children)#how many possible autofills
     node = sortChildrenHTL(node)#sort children from highest inputs into them highest to lowest
-    if possibleNumberOfAutofills < 5:
-        autofillEndings  = makeAutofillEndings(node, possibleNumberOfAutofills)
-    else:
-        autofillEndings = makeAutofillEndings(node, 5)#return up to top 5 possible autofill endings to it
+    autofillEndings = makeAutofillEndings(node, 5)#return up to top 5 possible autofill endings to it
     autofillResults = []
-    for ending in autofillEndings:
+    for ending in autofillEndings:#add endings to input
         autofillResults.append(UInput + ending)
     return autofillResults#end function by returning the array of autofills
 
