@@ -47,12 +47,46 @@ def advanceToEndOfWord(UInput, trie):
                 break
     return node
 
+def sortChildrenHTL(node):
+    highest = node.children[0].count
+    lowest = node.children[0].count#since both highest and lowest to start
+    for child in node.children:
+        count = child.count
+        if count > highest:
+            highest = count#if it is higher
+        elif(count<lowest):
+            lowest = count
+    node.children = []
+    for x in range(highest, lowest-1, -1):#goes from the highest to lowest (-1 because it stops right before lowest)
+        for child in node.children:#searches each child
+            if child.count == x:#sees if they have the same count
+                node.children.append(child)#adds them going highest to lowest
+    return node
+
+def Autofill(node):
+    if node.children == []:
+        return node.value
+    else:
+        return node.value + Autofill(node.children[0])
+
+def makeAutofillEndings(node, times):
+    autofillEndings = []
+    for x in range(times):
+        autofillEndings.append(Autofill(node))
+    return autofillEndings
+
 def returnCompletions(UInput, trie):
     node = advanceToEndOfWord(UInput,trie)#move down trie until end of word fragment
     possibleNumberOfAutofills=len(node.children)#how many possible autofills
-    #sort children from highest inputs into them highest to lowest
-    #return up to top 5 possible autofill endings to it
-    #end function by returning the array of autofills
+    node = sortChildrenHTL(node)#sort children from highest inputs into them highest to lowest
+    if possibleNumberOfAutofills < 5:
+        autofillEndings  = makeAutofillEndings(node, possibleNumberOfAutofills)
+    else:
+        autofillEndings = makeAutofillEndings(node, 5)#return up to top 5 possible autofill endings to it
+    autofillResults = []
+    for ending in autofillEndings:
+        autofillResults.append(UInput + ending)
+    return autofillResults#end function by returning the array of autofills
 
 #variables
 historyArray = codecs.open("my_history.txt").read().lower().split("\n")#split the words into an array
