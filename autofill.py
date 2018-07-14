@@ -50,6 +50,7 @@ def advanceToEndOfWord(UInput, trie):
 def sortChildrenHTL(node):
     highest = node.children[0].count
     lowest = node.children[0].count#since both highest and lowest to start
+    print(highest,lowest)
     for child in node.children:
         count = child.count
         if count > highest:
@@ -57,6 +58,7 @@ def sortChildrenHTL(node):
         elif(count<lowest):
             lowest = count
     new_children = []
+    print(highest,lowest)
     for x in range(highest, lowest-1, -1):#goes from the highest to lowest (-1 because it stops right before lowest)
         for child in node.children:#searches each child
             if child.count == x:#sees if they have the same count
@@ -75,7 +77,7 @@ def makeAutofillEndings(node, times):
     for x in range(0, times):
         try:
             autofillEndings.append(Autofill(node.children[x]))
-        except IndexError:
+        except IndexError:#incase there isn't 5 or more children
             return autofillEndings
     return autofillEndings
 
