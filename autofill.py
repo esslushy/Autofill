@@ -9,9 +9,9 @@ class TrieNode:
         self.children = []
 #functions
 def add(root, word):
-    inChild = False#not found to be in child node yet
     node = root#so it can change every time when new children are added and it goes down one node
     for char in word:#a node contains one letter therefore it needs to iterate through each letter
+        inChild = False#not found to be in child node yet. new letter unkown if in child
         for child in node.children:#check each child to see if it contains the value
             if child.value == char:#if they match
                 child.count+=1#increase count by one
@@ -83,8 +83,7 @@ def makeAutofillEndings(node, times):
 
 def returnCompletions(UInput, trie):
     node = advanceToEndOfWord(UInput,trie)#move down trie until end of word fragment
-    possibleNumberOfAutofills=len(node.children)#how many possible autofills
-    node = sortChildrenHTL(node)#sort children from highest inputs into them highest to lowest
+    #node = sortChildrenHTL(node)#sort children from highest inputs into them highest to lowest // Not working
     autofillEndings = makeAutofillEndings(node, 5)#return up to top 5 possible autofill endings to it
     autofillResults = []
     for ending in autofillEndings:#add endings to input
